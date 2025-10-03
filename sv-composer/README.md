@@ -24,10 +24,6 @@ uvicorn sv_api.main:app --reload
 pytest -q --cov
 ```
 
-### CORS for web clients
-
-The API now enables permissive CORS by default so browser clients (e.g. `sv-composer-ui`) can call it from `http://localhost:*`. To restrict access set `SV_API_CORS_ORIGINS` (comma-separated) and to disable CORS entirely set `SV_API_ENABLE_CORS=0` before launching the server.
-
 ## Endpoints
 
 - `GET /status`
@@ -50,6 +46,7 @@ The API now enables permissive CORS by default so browser clients (e.g. `sv-comp
 - `POST /control/expectation`
 - `POST /control/viewpoint`
 - `POST /control/attention`
+- `POST /p12/filmplan`
 
 ## Modules
 
@@ -64,10 +61,7 @@ The API now enables permissive CORS by default so browser clients (e.g. `sv-comp
 - **P9 — Evaluator**: [docs/p9-evaluator.md](docs/p9-evaluator.md)
 - **P10 — SDK & API**: [docs/p10-sdk-api.md](docs/p10-sdk-api.md)
 - **P11 — LLM Harness & Integration**: [docs/p11-llm-harness.md](docs/p11-llm-harness.md)
-
-## Modules
-
-- **P1 — Image-Schema Bank**: [docs/p1-image-schemas.md](docs/p1-image-schemas.md)
+- **P12 — Film Plan Generator**: [docs/p12-filmplan.md](docs/p12-filmplan.md)
 
 ## Dev
 ```bash
@@ -77,10 +71,10 @@ poetry run pytest -q
 
 ## LLM Configuration
 
-The `/generate` endpoint uses OpenAI Chat Completions (`gpt-5` by default) unless you opt out.
+The `/generate` endpoint uses OpenAI Chat Completions (`gpt-4o` by default) unless you opt out.
 
 - Set `OPENAI_API_KEY` to enable live generation. Optional overrides:
-  - `SV_OPENAI_MODEL` (default `gpt-5`)
+  - `SV_OPENAI_MODEL` (default `gpt-4o`)
   - `SV_OPENAI_TEMPERATURE` (default `0.7`)
   - `SV_OPENAI_TIMEOUT` (default `20` seconds)
 - `SV_LLM_DEFAULT` controls the default harness (`openai` or `echo`).
