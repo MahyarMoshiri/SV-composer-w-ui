@@ -1,0 +1,692 @@
+version: "0.1.0"
+frames:
+  - id: journey
+    definition: "Movement from a known source toward a shifting goal along a constrained route."
+    core_roles: [traveler, source, path, goal]
+    optional_roles: [guide, obstacle]
+    role_notes:
+      traveler: "Agent undergoing displacement (maps to near_far/contact)."
+      path: "Traversable line or street (maps to path)."
+      obstacle: "Boundary or blockage that raises difficulty (maps to boundary/blockage)."
+    allowed_schemas: [path, boundary, link, center_periphery, cycle, near_far]
+    required_schemas: [path]
+    disallowed_schemas: []
+    allowed_metaphors: [life_is_travel, memory_is_map, time_is_motion, still_motion, center_periphery]
+    disallowed_metaphors: []
+    metaphor_bias: { life_is_travel: 0.9, memory_is_map: 0.5, time_is_motion: 0.4 }
+    viewpoint_defaults: { person: "3rd", tense: "present", distance: "medium" }
+    attention_defaults: [{role: traveler, w: 0.5}, {schema: path, w: 0.6}, {schema: boundary, w: 0.3}]
+    gates_allowed: [bridge, tunnel, stairs, door]
+    motif_hints: [map, trace]
+    beat_affinity: { hook: 0.45, setup: 0.6, development: 0.75, turn: 0.55, reveal: 0.45, hook_out: 0.4 }
+    examples:
+      text: ["she follows the thin street toward a name that keeps moving"]
+    provenance: { source: "PoemCorpus v0.1 + SV_Extended v0.1", curator: "Mahyar", license: "CC-BY", confidence: 0.86 }
+
+  - id: threshold_crossing
+    definition: "A crosser meets a boundary and transitions from one state/place to another."
+    core_roles: [crosser, boundary, beyond]
+    optional_roles: [key, handle, witness]
+    role_notes:
+      boundary: "Door/edge/gate where relations change (maps to boundary)."
+      key: "Token that licenses passage (maps to link/contact)."
+    allowed_schemas: [boundary, link, path, contact, near_far]
+    required_schemas: [boundary]
+    disallowed_schemas: []
+    allowed_metaphors: [sleep_is_threshold, open_closed, language_is_key, control_is_holding, light_dark]
+    disallowed_metaphors: []
+    metaphor_bias: { sleep_is_threshold: 0.7, open_closed: 0.6, language_is_key: 0.5 }
+    viewpoint_defaults: { person: "3rd", tense: "present", distance: "close" }
+    attention_defaults: [{role: boundary, w: 0.7}, {schema: link, w: 0.4}]
+    gates_allowed: [door, threshold, turnstile]
+    motif_hints: [hinge, breath_hold]
+    beat_affinity: { hook: 0.35, setup: 0.55, development: 0.5, turn: 0.8, reveal: 0.7, hook_out: 0.45 }
+    examples:
+      text: ["the handle sinks; air changes sides"]
+    provenance: { source: "PoemCorpus v0.1 + SV_Extended v0.1", curator: "Mahyar", license: "CC-BY", confidence: 0.9 }
+
+  - id: key_lock
+    definition: "Control negotiated through keys, locks, and names that open or refuse rooms."
+    core_roles: [holder, key, lock, door]
+    optional_roles: [name, number]
+    role_notes:
+      holder: "Agent that grips or releases (maps to contact)."
+      key: "Enabler of linking/opening (maps to link)."
+      lock: "Barrier that encodes permission (maps to boundary/blockage)."
+    allowed_schemas: [link, boundary, contact, blockage]
+    required_schemas: [link]
+    disallowed_schemas: []
+    allowed_metaphors: [language_is_key, control_is_holding, open_closed]
+    disallowed_metaphors: []
+    metaphor_bias: { language_is_key: 0.85, control_is_holding: 0.75, open_closed: 0.6 }
+    viewpoint_defaults: { person: "3rd", tense: "present", distance: "close" }
+    attention_defaults: [{role: key, w: 0.6}, {schema: boundary, w: 0.4}]
+    gates_allowed: [door, latch]
+    motif_hints: [count, tongue]
+    beat_affinity: { setup: 0.55, development: 0.45, turn: 0.8, reveal: 0.5 }
+    examples:
+      text: ["she lays the keys on her tongue and the corridor unlocks"]
+    provenance: { source: "PoemCorpus v0.1 + SV_Extended v0.1", curator: "Mahyar", license: "CC-BY", confidence: 0.88 }
+
+  - id: bridge_tunnel
+    definition: "Transit through spanning or burrowing gates that connect separated zones."
+    core_roles: [traveler, gate, path, exit]
+    optional_roles: [echo]
+    role_notes:
+      gate: "Bridge/tunnel as shaped boundary you can enter (maps to boundary/container)."
+    allowed_schemas: [path, boundary, link, container, verticality]
+    required_schemas: [path]
+    disallowed_schemas: []
+    allowed_metaphors: [life_is_travel, light_dark, still_motion]
+    disallowed_metaphors: []
+    metaphor_bias: { life_is_travel: 0.75, light_dark: 0.5 }
+    viewpoint_defaults: { person: "3rd", tense: "present", distance: "medium" }
+    attention_defaults: [{role: gate, w: 0.6}, {schema: path, w: 0.5}]
+    gates_allowed: [bridge, tunnel]
+    motif_hints: [reverb, drip]
+    beat_affinity: { hook: 0.4, setup: 0.55, development: 0.65, turn: 0.6, reveal: 0.5 }
+    examples:
+      text: ["she enters the tunnel; the street exits elsewhere"]
+    provenance: { source: "PoemCorpus v0.1 + SV_Extended v0.1", curator: "Mahyar", license: "CC-BY", confidence: 0.83 }
+
+  - id: climb_stairs
+    definition: "Vertical effort across steps toward a landing or return to ground."
+    core_roles: [climber, stairs, landing]
+    optional_roles: [handrail, crack]
+    role_notes:
+      stairs: "Discrete vertical path (maps to verticality/path)."
+      crack: "Niche in steps that can hold traces/seeds (maps to container)."
+    allowed_schemas: [verticality, path, balance, container]
+    required_schemas: [verticality]
+    disallowed_schemas: []
+    allowed_metaphors: [up_down, life_is_travel, secrets_are_seeds]
+    disallowed_metaphors: []
+    metaphor_bias: { up_down: 0.8, secrets_are_seeds: 0.45 }
+    viewpoint_defaults: { person: "3rd", tense: "present", distance: "medium" }
+    attention_defaults: [{role: stairs, w: 0.6}, {schema: verticality, w: 0.6}]
+    gates_allowed: [stairs]
+    motif_hints: [count, breath]
+    beat_affinity: { setup: 0.5, development: 0.7, turn: 0.55, reveal: 0.45 }
+    examples:
+      text: ["a stolen step rises to my shoulder"]
+    provenance: { source: "PoemCorpus v0.1 + SV_Extended v0.1", curator: "Mahyar", license: "CC-BY", confidence: 0.84 }
+
+  - id: window
+    definition: "Seeing through a framed surface that balances inside and outside."
+    core_roles: [seer, window, inside, outside]
+    optional_roles: [lamp, page]
+    role_notes:
+      window: "Transparent boundary that meters light (maps to surface/boundary)."
+    allowed_schemas: [surface, center_periphery, boundary, balance]
+    required_schemas: [surface]
+    disallowed_schemas: []
+    allowed_metaphors: [knowledge_is_light, light_dark, self_is_shadow]
+    disallowed_metaphors: []
+    metaphor_bias: { knowledge_is_light: 0.8, light_dark: 0.6 }
+    viewpoint_defaults: { person: "3rd", tense: "present", distance: "medium" }
+    attention_defaults: [{role: window, w: 0.6}, {schema: center_periphery, w: 0.4}]
+    gates_allowed: [window]
+    motif_hints: [trace, dawn]
+    beat_affinity: { hook: 0.4, setup: 0.55, reveal: 0.75, hook_out: 0.5 }
+    examples:
+      text: ["small light makes the lines legible"]
+    provenance: { source: "PoemCorpus v0.1 + SV_Extended v0.1", curator: "Mahyar", license: "CC-BY", confidence: 0.82 }
+
+  - id: mirror
+    definition: "Self appears as reflection, arranging focus and margin within a frame."
+    core_roles: [self, mirror, image]
+    optional_roles: [pupil, frame]
+    role_notes:
+      self: "Actor split into viewer and viewed (maps to surface/center_periphery)."
+    allowed_schemas: [surface, center_periphery, contact]
+    required_schemas: [surface]
+    disallowed_schemas: []
+    allowed_metaphors: [self_is_shadow, knowledge_is_light, center_periphery]
+    disallowed_metaphors: []
+    metaphor_bias: { self_is_shadow: 0.85, center_periphery: 0.5 }
+    viewpoint_defaults: { person: "1st", tense: "present", distance: "close" }
+    attention_defaults: [{role: image, w: 0.6}, {schema: center_periphery, w: 0.5}]
+    gates_allowed: []
+    motif_hints: [steal, climb]
+    beat_affinity: { setup: 0.5, turn: 0.7, reveal: 0.6 }
+    examples:
+      text: ["my shadow arranges the room"]
+    provenance: { source: "PoemCorpus v0.1 + SV_Extended v0.1", curator: "Mahyar", license: "CC-BY", confidence: 0.86 }
+
+  - id: breath
+    definition: "Idea and mood cycle with inhale/exhale; space measured by breath."
+    core_roles: [breather, air, chest]
+    optional_roles: [wind]
+    role_notes:
+      air: "Medium that carries thought/voice (maps to cycle/contact)."
+    allowed_schemas: [cycle, contact, near_far]
+    required_schemas: [cycle]
+    disallowed_schemas: []
+    allowed_metaphors: [thought_is_breath, intimacy_is_closeness, silent_loud]
+    disallowed_metaphors: []
+    metaphor_bias: { thought_is_breath: 0.8, intimacy_is_closeness: 0.5 }
+    viewpoint_defaults: { person: "1st", tense: "present", distance: "close" }
+    attention_defaults: [{role: breath, w: 0.6}, {schema: cycle, w: 0.5}]
+    gates_allowed: []
+    motif_hints: [sigh, whisper]
+    beat_affinity: { hook: 0.35, setup: 0.55, development: 0.6, reveal: 0.55 }
+    examples:
+      text: ["what must go returns shaped like breath"]
+    provenance: { source: "PoemCorpus v0.1 + SV_Extended v0.1", curator: "Mahyar", license: "CC-BY", confidence: 0.8 }
+
+  - id: hush
+    definition: "Silence and small sounds modulate attention and choice."
+    core_roles: [listener, source, field]
+    optional_roles: [horn, ring]
+    role_notes:
+      source: "Event that emits hush/whisper or ring (maps to cycle/contact)."
+    allowed_schemas: [cycle, contact, surface]
+    required_schemas: [cycle]
+    disallowed_schemas: []
+    allowed_metaphors: [silent_loud, thought_is_breath]
+    disallowed_metaphors: []
+    metaphor_bias: { silent_loud: 0.85 }
+    viewpoint_defaults: { person: "3rd", tense: "present", distance: "medium" }
+    attention_defaults: [{role: source, w: 0.55}, {schema: surface, w: 0.35}]
+    gates_allowed: []
+    motif_hints: [hush, ring, horn]
+    beat_affinity: { hook: 0.6, setup: 0.55, turn: 0.6, reveal: 0.5 }
+    examples:
+      text: ["only a short ring passes through the wall"]
+    provenance: { source: "PoemCorpus v0.1 + SV_Extended v0.1", curator: "Mahyar", license: "CC-BY", confidence: 0.82 }
+
+  - id: street_scene
+    definition: "City as body; streets and bodies breathe, a day begins elsewhere."
+    core_roles: [street, bodies, timeflow]
+    optional_roles: [corner, handcart]
+    role_notes:
+      street: "Artery that carries motion (maps to part_whole/path)."
+      timeflow: "Ambient cycle of day (maps to cycle)."
+    allowed_schemas: [part_whole, surface, contact, cycle, path, center_periphery]
+    required_schemas: [part_whole]
+    disallowed_schemas: []
+    allowed_metaphors: [city_is_body, time_is_motion, still_motion, desire_is_pull]
+    disallowed_metaphors: []
+    metaphor_bias: { city_is_body: 0.75, time_is_motion: 0.6 }
+    viewpoint_defaults: { person: "3rd", tense: "present", distance: "medium" }
+    attention_defaults: [{role: street, w: 0.55}, {schema: cycle, w: 0.45}]
+    gates_allowed: [street, alley]
+    motif_hints: [pupil, shoulder]
+    beat_affinity: { hook: 0.45, setup: 0.6, development: 0.65, reveal: 0.5 }
+    examples:
+      text: ["by noon a new street grows out of people"]
+    provenance: { source: "PoemCorpus v0.1 + SV_Extended v0.1", curator: "Mahyar", license: "CC-BY", confidence: 0.81 }
+
+  - id: page_turn
+    definition: "A surface flips; visibility resets and a next darkness or light appears."
+    core_roles: [page, hand, next]
+    optional_roles: [margin]
+    role_notes:
+      page: "Flat surface that stores traces (maps to surface)."
+    allowed_schemas: [surface, cycle, center_periphery]
+    required_schemas: [surface]
+    disallowed_schemas: []
+    allowed_metaphors: [light_dark, still_motion, memory_is_map]
+    disallowed_metaphors: []
+    metaphor_bias: { light_dark: 0.7, still_motion: 0.55 }
+    viewpoint_defaults: { person: "3rd", tense: "present", distance: "close" }
+    attention_defaults: [{role: page, w: 0.65}, {schema: center_periphery, w: 0.35}]
+    gates_allowed: []
+    motif_hints: [trace, fold]
+    beat_affinity: { hook: 0.5, turn: 0.65, reveal: 0.7, hook_out: 0.6 }
+    examples:
+      text: ["this page slides toward the next darkness"]
+    provenance: { source: "PoemCorpus v0.1 + SV_Extended v0.1", curator: "Mahyar", license: "CC-BY", confidence: 0.85 }
+
+  - id: memory_map
+    definition: "A map or route is consulted; reading changes the way through."
+    core_roles: [reader, map, route, fold]
+    optional_roles: [backside]
+    role_notes:
+      map: "Encoded paths and edges (maps to path/boundary/surface)."
+    allowed_schemas: [path, surface, boundary]
+    required_schemas: [path]
+    disallowed_schemas: []
+    allowed_metaphors: [memory_is_map, life_is_travel, center_periphery]
+    disallowed_metaphors: []
+    metaphor_bias: { memory_is_map: 0.85, life_is_travel: 0.5 }
+    viewpoint_defaults: { person: "3rd", tense: "present", distance: "medium" }
+    attention_defaults: [{role: map, w: 0.6}, {schema: boundary, w: 0.35}]
+    gates_allowed: [bridge, stairs, street]
+    motif_hints: [grid, fold]
+    beat_affinity: { setup: 0.65, development: 0.55, turn: 0.5 }
+    examples:
+      text: ["as if we read the route from the back"]
+    provenance: { source: "PoemCorpus v0.1 + SV_Extended v0.1", curator: "Mahyar", license: "CC-BY", confidence: 0.83 }
+
+  - id: pursuit
+    definition: "A seeker follows a target drawn along invisible lines."
+    core_roles: [seeker, target, path]
+    optional_roles: [trace, obstacle]
+    role_notes:
+      target: "That which exerts pull (maps to attraction_repulsion)."
+    allowed_schemas: [path, attraction_repulsion, boundary]
+    required_schemas: [path]
+    disallowed_schemas: []
+    allowed_metaphors: [desire_is_pull, life_is_travel, time_is_motion]
+    disallowed_metaphors: []
+    metaphor_bias: { desire_is_pull: 0.8, life_is_travel: 0.45 }
+    viewpoint_defaults: { person: "3rd", tense: "present", distance: "medium" }
+    attention_defaults: [{role: target, w: 0.55}, {schema: path, w: 0.55}]
+    gates_allowed: [alley, bridge]
+    motif_hints: [lure, hunger]
+    beat_affinity: { hook: 0.5, development: 0.7, turn: 0.55 }
+    examples:
+      text: ["the cloud shows the lost and draws them on"]
+    provenance: { source: "PoemCorpus v0.1 + SV_Extended v0.1", curator: "Mahyar", license: "CC-BY", confidence: 0.8 }
+
+  - id: union_separation
+    definition: "Two parts join or part across a marked edge."
+    core_roles: [whole, part, boundary]
+    optional_roles: [witness]
+    role_notes:
+      boundary: "Line where relation flips (maps to boundary)."
+    allowed_schemas: [part_whole, container, boundary, balance]
+    required_schemas: [part_whole]
+    disallowed_schemas: []
+    allowed_metaphors: [raw_cooked, light_dark, near_far]
+    disallowed_metaphors: []
+    metaphor_bias: { raw_cooked: 0.7 }
+    viewpoint_defaults: { person: "3rd", tense: "present", distance: "close" }
+    attention_defaults: [{schema: boundary, w: 0.65}]
+    gates_allowed: [door, threshold]
+    motif_hints: [silence]
+    beat_affinity: { setup: 0.6, turn: 0.8, reveal: 0.7 }
+    examples:
+      text: ["the door stands between what was us and what remains"]
+    provenance: { source: "PoemCorpus v0.1 + SV_Extended v0.1", curator: "Mahyar", license: "CC-BY", confidence: 0.9 }
+
+  - id: sleep_gate
+    definition: "Sleep staged as a controlled crossing between worlds."
+    core_roles: [sleeper, bed, boundary]
+    optional_roles: [branch, world]
+    role_notes:
+      bed: "Support that stages the crossing (maps to boundary/link)."
+    allowed_schemas: [boundary, link, path]
+    required_schemas: [boundary]
+    disallowed_schemas: []
+    allowed_metaphors: [sleep_is_threshold, light_dark]
+    disallowed_metaphors: []
+    metaphor_bias: { sleep_is_threshold: 0.9 }
+    viewpoint_defaults: { person: "1st", tense: "present", distance: "close" }
+    attention_defaults: [{role: sleeper, w: 0.55}, {schema: boundary, w: 0.6}]
+    gates_allowed: [bed, window]
+    motif_hints: [branch, hush]
+    beat_affinity: { setup: 0.5, turn: 0.75, reveal: 0.55 }
+    examples:
+      text: ["sleep reenacts a careful accident between me and the world"]
+    provenance: { source: "PoemCorpus v0.1 + SV_Extended v0.1", curator: "Mahyar", license: "CC-BY", confidence: 0.9 }
+
+  - id: garden_seed
+    definition: "Secrets planted in small containers crack and sprout by morning."
+    core_roles: [hider, seed, crack, sprout]
+    optional_roles: [fruit]
+    role_notes:
+      crack: "Narrow container for concealment (maps to container/surface)."
+    allowed_schemas: [container, cycle, surface, balance]
+    required_schemas: [container]
+    disallowed_schemas: []
+    allowed_metaphors: [secrets_are_seeds, death_is_fruit, raw_cooked]
+    disallowed_metaphors: []
+    metaphor_bias: { secrets_are_seeds: 0.85, death_is_fruit: 0.4 }
+    viewpoint_defaults: { person: "3rd", tense: "present", distance: "close" }
+    attention_defaults: [{role: crack, w: 0.55}, {schema: cycle, w: 0.45}]
+    gates_allowed: [stair_crack, garden]
+    motif_hints: [white_shell, nail]
+    beat_affinity: { setup: 0.55, reveal: 0.75, hook_out: 0.5 }
+    examples:
+      text: ["a nail-seed sleeps in the stair's seam and peels white at dawn"]
+    provenance: { source: "PoemCorpus v0.1 + SV_Extended v0.1", curator: "Mahyar", license: "CC-BY", confidence: 0.9 }
+
+  - id: revelation
+    definition: "Information comes to light; attention recenters and relations reframe."
+    core_roles: [knower, clue, field]
+    optional_roles: [lamp, window]
+    role_notes:
+      clue: "Small sign that unlocks understanding (maps to surface/center_periphery)."
+    allowed_schemas: [surface, center_periphery, balance]
+    required_schemas: [surface]
+    disallowed_schemas: []
+    allowed_metaphors: [knowledge_is_light, light_dark]
+    disallowed_metaphors: []
+    metaphor_bias: { knowledge_is_light: 0.85 }
+    viewpoint_defaults: { person: "3rd", tense: "present", distance: "medium" }
+    attention_defaults: [{role: clue, w: 0.6}, {schema: center_periphery, w: 0.4}]
+    gates_allowed: [window]
+    motif_hints: [trace, focus]
+    beat_affinity: { reveal: 0.85, hook_out: 0.55 }
+    examples:
+      text: ["a small lantern makes the hidden line readable"]
+    provenance: { source: "PoemCorpus v0.1 + SV_Extended v0.1", curator: "Mahyar", license: "CC-BY", confidence: 0.84 }
+
+  - id: exchange
+    definition: "Two sides transfer objects, words, or permission across a contact point."
+    core_roles: [giver, taker, token]
+    optional_roles: [witness, counter]
+    role_notes:
+      token: "What crosses hands (maps to contact/link)."
+    allowed_schemas: [contact, link, balance]
+    required_schemas: [contact]
+    disallowed_schemas: []
+    allowed_metaphors: [language_is_key, control_is_holding, open_closed]
+    disallowed_metaphors: []
+    metaphor_bias: { control_is_holding: 0.65 }
+    viewpoint_defaults: { person: "3rd", tense: "present", distance: "close" }
+    attention_defaults: [{role: token, w: 0.6}, {schema: contact, w: 0.5}]
+    gates_allowed: [counter, door]
+    motif_hints: [count, palm]
+    beat_affinity: { setup: 0.55, development: 0.55, turn: 0.5 }
+    examples:
+      text: ["names change hands like keys"]
+    provenance: { source: "PoemCorpus v0.1 + SV_Extended v0.1", curator: "Mahyar", license: "CC-BY", confidence: 0.8 }
+
+  - id: waiting
+    definition: "Motion suspends; time thickens while attention holds on an object or gate."
+    core_roles: [waiter, object, gate]
+    optional_roles: [bench, clockless_day]
+    role_notes:
+      waiting: "Poised stillness with latent motion (maps to cycle/still_motion)."
+    allowed_schemas: [cycle, surface, contact]
+    required_schemas: [cycle]
+    disallowed_schemas: []
+    allowed_metaphors: [time_is_motion, still_motion, light_dark]
+    disallowed_metaphors: []
+    metaphor_bias: { still_motion: 0.75 }
+    viewpoint_defaults: { person: "3rd", tense: "present", distance: "medium" }
+    attention_defaults: [{role: object, w: 0.5}, {schema: cycle, w: 0.5}]
+    gates_allowed: [door, window]
+    motif_hints: [echo, shadow]
+    beat_affinity: { setup: 0.6, development: 0.5, reveal: 0.45 }
+    examples:
+      text: ["the street holds its breath before the handle falls"]
+    provenance: { source: "PoemCorpus v0.1 + SV_Extended v0.1", curator: "Mahyar", license: "CC-BY", confidence: 0.79 }
+
+  - id: ascent_descent
+    definition: "Rise or fall along a vertical path reshapes agency and view."
+    core_roles: [mover, vertical_path, high, low]
+    optional_roles: [handrail]
+    role_notes:
+      vertical_path: "Any climb/ladder/stair (maps to verticality/path)."
+    allowed_schemas: [verticality, path, balance]
+    required_schemas: [verticality]
+    disallowed_schemas: []
+    allowed_metaphors: [up_down, life_is_travel]
+    disallowed_metaphors: []
+    metaphor_bias: { up_down: 0.85 }
+    viewpoint_defaults: { person: "3rd", tense: "present", distance: "medium" }
+    attention_defaults: [{role: vertical_path, w: 0.6}, {schema: balance, w: 0.35}]
+    gates_allowed: [stairs, ladder]
+    motif_hints: [sway]
+    beat_affinity: { setup: 0.5, development: 0.65, turn: 0.55 }
+    examples:
+      text: ["a pine lifts; the small sphere keeps its shadow"]
+    provenance: { source: "PoemCorpus v0.1 + SV_Extended v0.1", curator: "Mahyar", license: "CC-BY", confidence: 0.83 }
+
+  - id: scavenging_run
+    definition: "A journey into the wasteland ruins to find valuable resources, technology, and supplies from the pre-war world."
+    core_roles: [scavenger, ruins, loot, threat]
+    optional_roles: [companion, vehicle, landmark]
+    role_notes:
+      scavenger: "The individual or group searching for resources in dangerous territory."
+      ruins: "The dilapidated location being explored—factory, vault, military base."
+      loot: "The valuable items discovered—weapons, tech, medicine, scrap."
+      threat: "The dangers encountered—raiders, creatures, radiation, traps."
+      companion: "A trusted ally who accompanies the scavenger."
+      vehicle: "Transportation used to carry heavy loads."
+    allowed_schemas: [path, container, blockage, near_far, force_dynamics]
+    required_schemas: [path, container]
+    allowed_metaphors: [wasteland_is_scavenge, technology_is_relic, scarcity_abundance, life_death]
+    metaphor_bias: { wasteland_is_scavenge: 0.9, technology_is_relic: 0.7, scarcity_abundance: 0.6, life_death: 0.5 }
+    viewpoint_defaults: { person: "1st", tense: "present", distance: "medium" }
+    attention_defaults: [{role: loot, w: 0.7}, {role: threat, w: 0.6}, {schema: container, w: 0.5}]
+    gates_allowed: [door, tunnel, collapsed_building, vault_entrance]
+    motif_hints: ["Geiger counter clicking", "wind howling through broken windows", "distant gunfire", "rusted machinery"]
+    beat_affinity: { hook: 0.6, setup: 0.7, development: 0.8, turn: 0.5, reveal: 0.6, hook_out: 0.4 }
+    examples:
+      text: ["The old Repconn factory was picked clean, but I found a plasma rifle in a locked maintenance closet.", "We had to fight our way through a pack of feral ghouls to get to the medical supplies."]
+    provenance: { source: "Fallout New Vegas Gameplay + Junkpunk", curator: "Manus", license: "CC-BY", confidence: 0.9 }
+
+  - id: faction_war
+    definition: "A large-scale military conflict between major factions competing for control of territory, resources, and ideological supremacy."
+    core_roles: [faction_a, faction_b, battlefield, objective]
+    optional_roles: [leader, soldier, casualty, neutral_party]
+    role_notes:
+      faction_a: "The primary faction—NCR, Legion, House, or Independent forces."
+      faction_b: "The opposing faction in the conflict."
+      battlefield: "The location of combat—Hoover Dam, the Strip, Mojave Outpost."
+      objective: "The strategic goal—dam control, territory, elimination of enemy."
+      leader: "The commanding figure directing the faction's strategy."
+      soldier: "Individual combatants on the ground."
+    allowed_schemas: [force_dynamics, blockage, path, boundary, verticality]
+    required_schemas: [force_dynamics, boundary]
+    allowed_metaphors: [power_is_dam, bear_bull, war_is_constant, order_chaos]
+    metaphor_bias: { power_is_dam: 0.9, bear_bull: 0.9, war_is_constant: 0.85, order_chaos: 0.7 }
+    viewpoint_defaults: { person: "3rd", tense: "past", distance: "far" }
+    attention_defaults: [{role: objective, w: 0.8}, {role: battlefield, w: 0.7}, {schema: force_dynamics, w: 0.6}]
+    gates_allowed: [fortification, trench, checkpoint, barricade]
+    motif_hints: ["propaganda posters", "battle plans", "rallying speeches", "artillery fire", "radio chatter"]
+    beat_affinity: { hook: 0.5, setup: 0.6, development: 0.9, turn: 0.8, reveal: 0.7, hook_out: 0.6 }
+    examples:
+      text: ["The Legion threw everything they had at the dam, but the NCR held the line.", "The battle for New Vegas was fought street by street, casino by casino."]
+    provenance: { source: "Fallout New Vegas Main Quest", curator: "Manus", license: "CC-BY", confidence: 0.95 }
+
+  - id: old_world_blues
+    definition: "A melancholic reflection on the ruins of pre-war civilization, triggered by discovering artifacts that evoke lost beauty and tragedy."
+    core_roles: [observer, ruin, artifact, memory]
+    optional_roles: [ghost, echo, holotape]
+    role_notes:
+      observer: "The individual contemplating the past—often the Courier or companion."
+      ruin: "The decaying location from the Old World—vault, diner, home, casino."
+      artifact: "A specific object that triggers reflection—terminal, photograph, toy, music."
+      memory: "The emotional or narrative content associated with the artifact."
+      holotape: "An audio recording that provides direct testimony from the past."
+    allowed_schemas: [surface, cycle, container, center_periphery, boundary]
+    required_schemas: [surface, cycle]
+    allowed_metaphors: [past_future, technology_is_relic, vegas_is_mirage, holding_letting_go]
+    metaphor_bias: { past_future: 0.9, technology_is_relic: 0.8, vegas_is_mirage: 0.6, holding_letting_go: 0.7 }
+    viewpoint_defaults: { person: "3rd", tense: "present", distance: "close" }
+    attention_defaults: [{role: artifact, w: 0.8}, {role: memory, w: 0.7}, {schema: cycle, w: 0.6}]
+    gates_allowed: [vault, abandoned_diner, pre-war_home, museum]
+    motif_hints: ["flickering holotape", "a child's toy in the rubble", "faded pre-war poster", "Big Iron on the radio"]
+    beat_affinity: { hook: 0.7, setup: 0.8, development: 0.5, turn: 0.4, reveal: 0.9, hook_out: 0.6 }
+    examples:
+      text: ["This terminal holds the last message of a family that never made it to the vault.", "The music on this old radio is a ghost from another time."]
+    provenance: { source: "Fallout New Vegas Lore + Decopunk Aesthetic", curator: "Manus", license: "CC-BY", confidence: 0.92 }
+
+  - id: new_world_hope
+    definition: "A determined effort to build a new society from the ashes, involving difficult choices about what to preserve and what to discard."
+    core_roles: [builder, settlement, ideal, obstacle]
+    optional_roles: [community, leader, sacrifice, blueprint]
+    role_notes:
+      builder: "The individual or group striving to create something new."
+      settlement: "The nascent community or faction being built."
+      ideal: "The guiding principle or vision—democracy, autocracy, independence."
+      obstacle: "The internal or external threat to the vision."
+      blueprint: "The plan or model for the new society."
+    allowed_schemas: [part_whole, source_path_goal, force_dynamics, boundary, link]
+    required_schemas: [part_whole, source_path_goal]
+    allowed_metaphors: [past_future, power_is_dam, mojave_is_crucible, order_chaos]
+    metaphor_bias: { past_future: 0.9, power_is_dam: 0.7, mojave_is_crucible: 0.75, order_chaos: 0.6 }
+    viewpoint_defaults: { person: "3rd", tense: "present", distance: "medium" }
+    attention_defaults: [{role: ideal, w: 0.8}, {role: obstacle, w: 0.7}, {schema: source_path_goal, w: 0.6}]
+    gates_allowed: [makeshift_gate, town_hall, community_garden, workshop]
+    motif_hints: ["a newly drawn map", "a council meeting", "the first harvest", "construction sounds"]
+    beat_affinity: { hook: 0.6, setup: 0.8, development: 0.9, turn: 0.7, reveal: 0.8, hook_out: 0.7 }
+    examples:
+      text: ["We're building something that will last, something better than the world that came before.", "It's not perfect, but it's ours."]
+    provenance: { source: "Fallout New Vegas Themes", curator: "Manus", license: "CC-BY", confidence: 0.9 }
+
+  - id: sierra_madre
+    definition: "A deadly trap disguised as treasure—the Sierra Madre casino lures with promises of wealth but demands you let go to survive."
+    core_roles: [victim, casino, treasure, collar]
+    optional_roles: [ghost_people, hologram, companion]
+    role_notes:
+      victim: "The individual trapped in the Sierra Madre—the Courier and companions."
+      casino: "The art deco casino itself, a beautiful prison."
+      treasure: "The gold bars and riches that tempt the victim to stay."
+      collar: "The explosive collar that enforces the trap."
+      ghost_people: "The hazmat-suited enemies that haunt the casino."
+    allowed_schemas: [container, blockage, attraction_repulsion, force_dynamics, boundary]
+    required_schemas: [container, blockage]
+    allowed_metaphors: [casino_is_trap, greed_is_weight, holding_letting_go, past_future]
+    metaphor_bias: { casino_is_trap: 0.95, greed_is_weight: 0.9, holding_letting_go: 0.95, past_future: 0.7 }
+    viewpoint_defaults: { person: "1st", tense: "present", distance: "close" }
+    attention_defaults: [{role: treasure, w: 0.85}, {role: collar, w: 0.8}, {schema: blockage, w: 0.75}]
+    gates_allowed: [vault_door, force_field, locked_elevator]
+    motif_hints: ["beeping collar", "red mist", "hologram flicker", "art deco architecture", "Father Elijah's voice"]
+    beat_affinity: { hook: 0.9, setup: 0.7, development: 0.8, turn: 0.95, reveal: 0.9, hook_out: 0.85 }
+    examples:
+      text: ["Finding it isn't the hard part—it's letting go.", "The Sierra Madre is a beautiful, terrible trap.", "Begin again, but this time let go."]
+    provenance: { source: "Dead Money DLC", curator: "Manus", license: "CC-BY", confidence: 0.96 }
+
+  - id: rigged_game
+    definition: "A situation where the outcome has been predetermined through manipulation, requiring cunning to turn the tables."
+    core_roles: [player, dealer, game, stakes]
+    optional_roles: [ace, mark, house]
+    role_notes:
+      player: "The individual trying to beat the rigged system—often the Courier."
+      dealer: "The one who rigged the game—Benny, House, Caesar."
+      game: "The manipulated situation—politics, casino, war."
+      stakes: "What's at risk—life, power, the Mojave's future."
+      ace: "The hidden advantage that can turn the tables."
+    allowed_schemas: [force_dynamics, link, blockage, attraction_repulsion]
+    required_schemas: [force_dynamics, link]
+    allowed_metaphors: [casino_is_trap, power_is_dam, truth_deception, bear_bull]
+    metaphor_bias: { casino_is_trap: 0.85, power_is_dam: 0.75, truth_deception: 0.9, bear_bull: 0.6 }
+    viewpoint_defaults: { person: "1st", tense: "present", distance: "medium" }
+    attention_defaults: [{role: stakes, w: 0.8}, {role: dealer, w: 0.75}, {schema: force_dynamics, w: 0.7}]
+    gates_allowed: [casino_entrance, back_room, penthouse]
+    motif_hints: ["poker chips", "loaded dice", "marked cards", "platinum chip", "spinning roulette"]
+    beat_affinity: { hook: 0.85, setup: 0.7, development: 0.75, turn: 0.9, reveal: 0.85, hook_out: 0.7 }
+    examples:
+      text: ["Truth is, the game was rigged from the start.", "The house always wins—unless you rig it back.", "Time to cash in my chips."]
+    provenance: { source: "Fallout New Vegas Rigging Theme", curator: "Manus", license: "CC-BY", confidence: 0.94 }
+
+  - id: courier_journey
+    definition: "The protagonist's path from death to rebirth, seeking revenge, answers, and ultimately the fate of the Mojave."
+    core_roles: [courier, grave, platinum_chip, destination]
+    optional_roles: [benny, doc_mitchell, companion, faction]
+    role_notes:
+      courier: "The player character, shot and left for dead."
+      grave: "The shallow grave in Goodsprings cemetery where the journey begins."
+      platinum_chip: "The MacGuffin that sets the plot in motion."
+      destination: "The evolving goal—revenge, truth, power, independence."
+      benny: "The man who shot you and started it all."
+    allowed_schemas: [path, cycle, boundary, source_path_goal, force_dynamics]
+    required_schemas: [path, cycle]
+    allowed_metaphors: [courier_is_ghost, past_future, mojave_is_crucible, truth_deception]
+    metaphor_bias: { courier_is_ghost: 0.9, past_future: 0.8, mojave_is_crucible: 0.75, truth_deception: 0.7 }
+    viewpoint_defaults: { person: "1st", tense: "past", distance: "medium" }
+    attention_defaults: [{role: destination, w: 0.75}, {role: platinum_chip, w: 0.7}, {schema: path, w: 0.8}]
+    gates_allowed: [goodsprings, primm, nipton, novac, boulder_city, hoover_dam]
+    motif_hints: ["bullet scar", "Pip-Boy map", "companion banter", "faction reputation", "radio signals"]
+    beat_affinity: { hook: 0.95, setup: 0.8, development: 0.85, turn: 0.8, reveal: 0.75, hook_out: 0.7 }
+    examples:
+      text: ["I woke up in a grave with a bullet in my head and a score to settle.", "The Mojave doesn't care who you were—only who you become."]
+    provenance: { source: "Fallout New Vegas Main Quest", curator: "Manus", license: "CC-BY", confidence: 0.95 }
+
+  - id: hoover_dam_battle
+    definition: "The climactic battle for control of Hoover Dam, where all factions converge to decide the future of the Mojave."
+    core_roles: [courier, faction, dam, enemy]
+    optional_roles: [general_oliver, legate_lanius, securitron_army, sniper]
+    role_notes:
+      courier: "The player character whose choices determine the battle's outcome."
+      faction: "The faction the Courier supports—NCR, Legion, House, or Independent."
+      dam: "Hoover Dam itself, the source of power and the battlefield."
+      enemy: "The opposing faction attempting to take or hold the dam."
+      legate_lanius: "Caesar's Legion's supreme commander."
+      general_oliver: "NCR's arrogant general."
+    allowed_schemas: [force_dynamics, boundary, blockage, verticality, center_periphery]
+    required_schemas: [force_dynamics, boundary]
+    allowed_metaphors: [power_is_dam, bear_bull, war_is_constant, past_future, order_chaos]
+    metaphor_bias: { power_is_dam: 0.95, bear_bull: 0.9, war_is_constant: 0.85, past_future: 0.75, order_chaos: 0.7 }
+    viewpoint_defaults: { person: "1st", tense: "present", distance: "medium" }
+    attention_defaults: [{role: dam, w: 0.9}, {role: enemy, w: 0.85}, {schema: force_dynamics, w: 0.8}]
+    gates_allowed: [dam_gate, power_plant, visitor_center, legate_camp]
+    motif_hints: ["turbines humming", "gunfire echoing", "vertibird overhead", "explosions", "radio commands"]
+    beat_affinity: { hook: 0.7, setup: 0.75, development: 0.95, turn: 0.9, reveal: 0.85, hook_out: 0.9 }
+    examples:
+      text: ["The Bear and the Bull meet at the Dam, and I'm the one who decides who wins.", "The battle for Hoover Dam will echo through history."]
+    provenance: { source: "Fallout New Vegas Finale", curator: "Manus", license: "CC-BY", confidence: 0.96 }
+
+  - id: strip_arrival
+    definition: "The moment of entering the New Vegas Strip for the first time, experiencing the contrast between wasteland and neon excess."
+    core_roles: [visitor, strip, gate, casino]
+    optional_roles: [securitron, prostitute, gambler, mr_house]
+    role_notes:
+      visitor: "The individual entering the Strip—usually the Courier."
+      strip: "The neon-lit heart of New Vegas, a preserved slice of pre-war luxury."
+      gate: "The checkpoint that separates the Strip from the wasteland."
+      casino: "The individual casinos—Tops, Ultra-Luxe, Gomorrah, Lucky 38."
+      mr_house: "The mysterious ruler of the Strip."
+    allowed_schemas: [boundary, center_periphery, surface, attraction_repulsion, container]
+    required_schemas: [boundary, center_periphery]
+    allowed_metaphors: [vegas_is_mirage, light_dark, scarcity_abundance, clean_rusted]
+    metaphor_bias: { vegas_is_mirage: 0.9, light_dark: 0.85, scarcity_abundance: 0.8, clean_rusted: 0.75 }
+    viewpoint_defaults: { person: "1st", tense: "present", distance: "medium" }
+    attention_defaults: [{role: strip, w: 0.85}, {role: casino, w: 0.8}, {schema: center_periphery, w: 0.75}]
+    gates_allowed: [strip_gate, casino_entrance, lucky_38_elevator]
+    motif_hints: ["neon signs buzzing", "slot machines ringing", "big band music", "art deco facades", "securitron patrols"]
+    beat_affinity: { hook: 0.85, setup: 0.9, development: 0.6, turn: 0.5, reveal: 0.8, hook_out: 0.7 }
+    examples:
+      text: ["The Strip rises from the wasteland like a jewel, all neon and chrome.", "After days in the desert, the lights of Vegas feel like a dream."]
+    provenance: { source: "Fallout New Vegas + Decopunk Aesthetic", curator: "Manus", license: "CC-BY", confidence: 0.91 }
+
+  - id: junkyard_assembly
+    definition: "The creative act of building something functional from scavenged parts, embodying wasteland ingenuity and junkpunk aesthetics."
+    core_roles: [tinkerer, workshop, parts, creation]
+    optional_roles: [blueprint, tool, assistant, malfunction]
+    role_notes:
+      tinkerer: "The individual crafting or repairing—Courier, Raul, Veronica, Arcade."
+      workshop: "The workspace—garage, bunker, shack, workbench."
+      parts: "The scavenged components—scrap metal, vacuum tubes, duct tape, wire."
+      creation: "The finished product—weapon, armor, robot, vehicle."
+      malfunction: "The inevitable failure that requires improvisation."
+    allowed_schemas: [part_whole, link, container, source_path_goal, force_dynamics]
+    required_schemas: [part_whole, link]
+    allowed_metaphors: [wasteland_is_scavenge, technology_is_relic, clean_rusted, human_machine]
+    metaphor_bias: { wasteland_is_scavenge: 0.9, technology_is_relic: 0.85, clean_rusted: 0.75, human_machine: 0.6 }
+    viewpoint_defaults: { person: "1st", tense: "present", distance: "close" }
+    attention_defaults: [{role: creation, w: 0.8}, {role: parts, w: 0.75}, {schema: part_whole, w: 0.7}]
+    gates_allowed: [workbench, garage, bunker, shack]
+    motif_hints: ["welding sparks", "duct tape", "jury-rigged circuits", "grinding metal", "wrench turning"]
+    beat_affinity: { hook: 0.6, setup: 0.75, development: 0.85, turn: 0.7, reveal: 0.65, hook_out: 0.6 }
+    examples:
+      text: ["I built this rifle from three broken ones and a prayer.", "In the wasteland, everything is spare parts waiting to be something else."]
+    provenance: { source: "Fallout Crafting System + Junkpunk/Dieselpunk", curator: "Manus", license: "CC-BY", confidence: 0.89 }
+
+  - id: letting_go_moment
+    definition: "A pivotal choice where a character must release their grip on the past, treasure, or obsession to move forward."
+    core_roles: [holder, object, choice, consequence]
+    optional_roles: [tempter, witness, ghost]
+    role_notes:
+      holder: "The individual facing the choice—Courier, companion, Father Elijah."
+      object: "What must be released—gold bars, trauma, loved one, ideology."
+      choice: "The moment of decision—leave treasure, forgive, move on."
+      consequence: "The result of holding on or letting go—freedom or death."
+      tempter: "The voice urging them to hold on—greed, fear, love."
+    allowed_schemas: [force_dynamics, boundary, container, cycle, balance]
+    required_schemas: [force_dynamics, boundary]
+    allowed_metaphors: [holding_letting_go, greed_is_weight, past_future, casino_is_trap]
+    metaphor_bias: { holding_letting_go: 0.95, greed_is_weight: 0.9, past_future: 0.85, casino_is_trap: 0.75 }
+    viewpoint_defaults: { person: "1st", tense: "present", distance: "close" }
+    attention_defaults: [{role: choice, w: 0.9}, {role: object, w: 0.85}, {schema: boundary, w: 0.8}]
+    gates_allowed: [vault_exit, grave, threshold, crossroads]
+    motif_hints: ["heavy breathing", "countdown timer", "Father Elijah's warning", "weight limit exceeded", "door closing"]
+    beat_affinity: { hook: 0.7, setup: 0.75, development: 0.8, turn: 0.95, reveal: 0.9, hook_out: 0.85 }
+    examples:
+      text: ["I looked at the gold bars, then at the exit. I couldn't carry both.", "Finding it isn't the hard part—it's letting go.", "Begin again."]
+    provenance: { source: "Dead Money Core Theme", curator: "Manus", license: "CC-BY", confidence: 0.96 }
+
+
+constraints:
+  max_schemas_per_scene: 6
+  max_metaphors_per_frame: 4
+  default_viewpoint: { person: "3rd", tense: "present", distance: "medium" }
+  banned_frame_pairs: []
+
