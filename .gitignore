@@ -1,0 +1,67 @@
+# General OS/IDE
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Node/Frontend
+node_modules/
+dist/
+build/
+.turbo/
+.cache/
+.vite/
+coverage/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
+.coverage
+coverage.xml
+
+# Env files
+.env
+.env.*
+!.env.example
+
+# Archives
+*.zip
+*.tar
+*.tar.gz
+
+# Ignore everything by default at repo root
+/*
+
+# Allowlisted project paths/files
+!/.gitignore
+!/src/
+!/src/**
+!/public/
+!/public/**
+!/sv-composer/
+!/sv-composer/**
+!/package.json
+!/pnpm-lock.yaml
+!/vite.config.js
+!/index.html
+!/eslint.config.js
+!/ARCHITECTURE.md
+!/DEPLOYMENT.md
+!/PROJECT_SUMMARY.md
+!/README.md
+!/components.json
+!/jsconfig.json
+!/.manus-template-version
+
